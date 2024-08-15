@@ -1,10 +1,18 @@
 import MeetingTypeList from '@/components/MeetingTypeList'
 
 const Home = () => {
-  const now = new Date()
-const time = now.toLocaleTimeString('en-us',{hour: '2-digit',minute: '2-digit'})
-const date = (new Intl.DateTimeFormat("en-us",{
-  dateStyle:"full"})).format(now)
+  const now = new Date();
+
+  // Manually adjust for GMT+6 by adding 6 hours
+  const offset = 6 * 60; // Offset in minutes
+  const adjustedTime = new Date(now.getTime() + offset * 60 * 1000);
+  
+  // Get the time in the desired format
+  const time = adjustedTime.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: true });
+  
+  // Get the date in the desired format
+  const date = (new Intl.DateTimeFormat('en-us', { dateStyle: 'full' })).format(adjustedTime);
+  
 
   return (
 <section className='flex size-full flex-col gap-10 text-white'>
