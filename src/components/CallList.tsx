@@ -68,7 +68,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   if (isLoading) return <Loader />;
 
   const calls = getCalls();
-  console.log(calls)
+
   const noCallsMessage = getNoCallsMessage();
 
   return (

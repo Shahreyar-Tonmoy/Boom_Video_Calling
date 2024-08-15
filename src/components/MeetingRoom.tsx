@@ -23,13 +23,13 @@ import Loader from './Loader';
 import EndCallButton from './EndCallButton';
 import { cn } from '@/lib/utils';
 
-type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right';
+type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right' | 'speaker-center';
 
 const MeetingRoom = () => {
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get('personal');
   const router = useRouter();
-  const [layout, setLayout] = useState<CallLayoutType>('speaker-left');
+  const [layout, setLayout] = useState<CallLayoutType>('speaker-center');
   const [showParticipants, setShowParticipants] = useState(false);
   const { useCallCallingState } = useCallStateHooks();
 
@@ -44,18 +44,20 @@ const MeetingRoom = () => {
   const CallLayout = () => {
     switch (layout) {
       case 'grid':
-        return <PaginatedGridLayout />;
+        return  <PaginatedGridLayout/>;
+      case 'speaker-center':
+        return <SpeakerLayout />;
       case 'speaker-right':
         return <SpeakerLayout participantsBarPosition="left" />;
       default:
-        return <SpeakerLayout participantsBarPosition="right" />;
+        return <SpeakerLayout participantsBarPosition="left" />;
     }
   };
 
   return (
     <section className="relative h-screen w-full overflow-hidden pt-4 text-white">
       <div className="relative flex size-full items-center justify-center">
-        <div className="flex size-full max-w-[1000px] items-center">
+        <div className="flex  size-full md:size-fit max-w-screen-xl mx-auto items-center md:items-stretch  ">
           <CallLayout />
         </div>
         <div
@@ -77,7 +79,7 @@ const MeetingRoom = () => {
             </DropdownMenuTrigger>
           </div>
           <DropdownMenuContent className="border-dark-1 bg-dark-1 text-white">
-            {['Grid', 'Speaker-Left', 'Speaker-Right'].map((item, index) => (
+            {['speaker-center','Grid', 'Speaker-Left', 'Speaker-Right',].map((item, index) => (
               <div key={index}>
                 <DropdownMenuItem
                   onClick={() =>
