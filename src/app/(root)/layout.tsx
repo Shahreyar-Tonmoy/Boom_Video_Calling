@@ -5,8 +5,6 @@ export const metadata: Metadata = {
   title: "Boom",
   description: "Video calling app",
   icons:  "/icons/logo.svg"
-    
-      
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
